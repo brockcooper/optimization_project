@@ -1,8 +1,6 @@
 ## Website Performance Optimization portfolio project
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
-
-To get started, check out the repository, inspect the code,
+This was a project where I took a poor-performing website and optimized it to meet 
 
 ### Getting started
 
@@ -30,3 +28,13 @@ Some useful tips to help you get started:
 
 6. [View online version here](http://brockcooper.github.io/optimization_project/)
 
+####Part 2: Optimizations Made
+
+######Optimizations Made to index.html:
+1. Optimized images to actual size needed
+2. Reduced image sizes
+3. Comibined CSS files to one file
+4. Refactored CSS file to call class names instead of using CSS Combinators
+4. Moved script and CSS to end of file to load last for faster initial loading times
+5. Ensured non-essestial JS was loaded asynchronously
+6. Minified CSS and HTML files
