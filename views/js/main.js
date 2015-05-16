@@ -421,8 +421,10 @@ var resizePizzas = function(size) {
 
   changeSliderLabel(size);
 
-  // Iterates through pizza elements on the page and changes their widths
+  // Iterates through pizza elements on the page and changes their widths based on size
   function changePizzaSizes(size) {
+    var newWidth;
+    // Returns percentage to use for width
     switch(size) {
       case "1":
         newWidth = 25;
@@ -439,6 +441,7 @@ var resizePizzas = function(size) {
     var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
 
     for (var i=0; i < randomPizzas.length; i++){
+      // Uses percentage from switch above to turn into a true percentage 
       randomPizzas[i].style.width = newWidth + "%";
     }
   }
@@ -462,7 +465,7 @@ for (var i = 2; i < 100; i++) {
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
-window.performance.measure("measure_pizza_generation", "mark_start_generating", "mark_end_generating");
+window.performance.measure("measure_pizza_generation", "mark_start_generating", "mark_end_generating"); 
 var timeToGenerate = window.performance.getEntriesByName("measure_pizza_generation");
 console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "ms");
 
@@ -488,7 +491,6 @@ function updatePositions(items) {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  //var items = document.getElementsByClassName('mover');
   var scrollTop = document.body.scrollTop;
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((scrollTop / 1250) + (i % 5));
