@@ -32,9 +32,15 @@ Some useful tips to help you get started:
 
 ######Optimizations Made to index.html:
 1. Optimized images to actual size needed
-2. Reduced image sizes
-3. Comibined CSS files to one file
-4. Refactored CSS file to call class names instead of using CSS Combinators
-4. Moved script and CSS to end of file to load last for faster initial loading times
-5. Ensured non-essestial JS was loaded asynchronously
-6. Minified CSS and HTML files
+1. Reduced image sizes
+1. Comibined CSS files to one file
+1. Refactored CSS file to call class names instead of using CSS Combinators
+1. Moved script and CSS to end of file to load last for faster initial loading times
+1. Ensured non-essestial JS was loaded asynchronously
+1. Minified CSS and HTML files
+
+######Optimizations Made to pizza.html:
+1. Optimized images to actual size needed
+1. Reduced image sizes
+1. Refactored CSS file to call class names instead of using CSS Combinators
+1. Ensured non-essestial JS was loaded asynchronously
