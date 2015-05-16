@@ -44,3 +44,18 @@ Some useful tips to help you get started:
 1. Reduced image sizes
 1. Refactored CSS file to call class names instead of using CSS Combinators
 1. Ensured non-essestial JS was loaded asynchronously
+1. Minified CSS, HTML, and JS files
+
+######Optimizations Made to Resize Pizzas:
+1. Simplified width calculation by removing unnecessary function converting percents
+to pixels
+1. Got rid of forced synchronous layout issue where the function accessed DOM thorugh 
+each loop by having the loop access a variable outside the loop
+
+######Optimizations Made to Scrolling:
+1. Made a smaller image for pizzas in background
+1. Reduced number of pizzas being generated from hundreds to 25
+1. Create items variable outside updatePositions function so function wouldn't re-create 
+an array of elements on each scroll
+1. Added "transform" properties to mover class in CSS to force elements into their 
+own composite layer 
