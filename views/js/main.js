@@ -404,15 +404,16 @@ var resizePizzas = function(size) {
 
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
+    // Changed from querySelector to getElementById
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -422,6 +423,8 @@ var resizePizzas = function(size) {
   changeSliderLabel(size);
 
   // Iterates through pizza elements on the page and changes their widths based on size
+  // Simplified width calculation by removing unnecessary function converting percents
+  // to pixels
   function changePizzaSizes(size) {
     var newWidth;
     // Returns percentage to use for width
@@ -438,8 +441,11 @@ var resizePizzas = function(size) {
       default:
         console.log("bug in sizeSwitcher");
     }
-    var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+    // Changed from querySelector to getElementsByClassName
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 
+    // Got rid of forced synchronous layout issue where the function accessed DOM thorugh 
+    // each loop by having the loop access a variable outside the loop
     for (var i=0; i < randomPizzas.length; i++){
       // Uses percentage from switch above to turn into a true percentage 
       randomPizzas[i].style.width = newWidth + "%";
@@ -458,8 +464,10 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+// Changed from querySelector to getElementById
+// Took pizzasDiv out of the loop
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -491,9 +499,10 @@ function updatePositions(items) {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var scrollTop = document.body.scrollTop;
+  // Took this out of the loop since it was accessing the DOM each time
+  var scrollTop = document.body.scrollTop / 1250;
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollTop / 1250) + (i % 5));
+    var phase = Math.sin((scrollTop) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -508,22 +517,30 @@ function updatePositions(items) {
 }
 
 // runs updatePositions on scroll
+// Created items variable outside updatePositions function so function wouldn't re-create 
+// an array of elements on each scroll
+// Changed from querySelector to getElementsByClassName
 var items = document.getElementsByClassName('mover');
 window.addEventListener('scroll', function(){updatePositions(items);});
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 7;
-  var s = 400;
-  for (var i = 0; i < 25; i++) {
+  var cols = 8;
+  // Exapnded the spacing from 256 to 300 to accomodate larger screens
+  var s = 300;
+  // Reduced the amount of sliding pizzas from 200 to 40 (8 cols x 5 rows)
+  for (var i = 0; i < 40; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
+    // Made a smaller image for pizzas in background
     elem.src = "images/pizza-mover.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    // Changed from querySelector to getElementById
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
+  // Changed from querySelector to getElementsByClassName
   updatePositions(document.getElementsByClassName('mover'));
 });

@@ -54,8 +54,9 @@ each loop by having the loop access a variable outside the loop
 
 ######Optimizations Made to Scrolling:
 1. Made a smaller image for pizzas in background
-1. Reduced number of pizzas being generated from hundreds to 25
-1. Create items variable outside updatePositions function so function wouldn't re-create 
+1. Reduced number of pizzas being generated from hundreds to 40
+1. Created items variable outside updatePositions function so function wouldn't re-create 
 an array of elements on each scroll
 1. Added "transform" properties to mover class in CSS to force elements into their 
 own composite layer 
+1. Changed any querySelector calls to getElementById or getElementsByClassName
